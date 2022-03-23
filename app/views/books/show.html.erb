@@ -11,7 +11,7 @@
   		<table class='table'>
   		  <tr>
           <td><%= link_to(@book.user) do %>
-            <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
+            <%= image_tag @book.user.get_profile_image(100,100) %><br>
             <%= @book.user.name %>
             <% end %>
           </td>
@@ -19,11 +19,13 @@
           <td><%= @book.body %></td>
           <td>
             <%if @book.favorited_by?(current_user)%>
-            <%=link_to book_favorites_path(@book),method: :destroy do%><i class="fas fa-heart" style="color:red;" aria-hidden="true"></i><%=@book.favorites.count%>
-            <%end%>
+              <%=link_to book_favorites_path(@book),method: :delete do%>
+                <i class="fas fa-heart" style="color:red;" aria-hidden="true"></i><%=@book.favorites.count%>
+              <%end%>
             <%else%>
-            <%=link_to book_favorites_path(@book),method: :post do%><i class="fas fa-heart" aria-hidden="true"></i><%=@book.favorites.count%>
-            <%end%>
+              <%=link_to book_favorites_path(@book),method: :post do%>
+                <i class="fas fa-heart" aria-hidden="true"></i><%=@book.favorites.count%>
+              <%end%>
             <%end%>
           </td>
           <td>コメント数:<%=@book.book_comments.count%></td>
@@ -39,13 +41,15 @@
           <tr>
             <td>
               <%=link_to user_path(book_comment.user)do%>
-              <%=image_tag book_comment.user.get_profile_image,size:"60×60"%><br>
+              <%= image_tag book_comment.user.get_profile_image(60,60) %><br>
               <%=book_comment.user.name%>
               <%end%>
             </td>
             <td><%=book_comment.comment%></td>
             <td>
-              <%=link_to "Destroy",book_book_comment_path(book_comment.user),method: :delete,class:"btn btn-sm btn-danger"%>
+              <%if book_comment.user==current_user%>
+              <%=link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),method: :delete,class:"btn btn-sm btn-danger"%>
+              <%end%>
             </td>
           </tr>
           <%end%>
@@ -53,7 +57,7 @@
       </table>
       <%=form_with model:[@book,@book_comment],local: true do |f|%>
       <%=f.text_area :comment, rows: "5",class:"w-100"%>
-      <%=f.submit"送信",class:"btn btn-sm btn-light btn-outline-secondary btn-pull-right"%>
+      <%=f.submit"送信",class:"btn btn-sm btn-light btn-outline-secondary"%>
       <%end%>
     </div>
   </div>
