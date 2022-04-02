@@ -29,17 +29,19 @@ class User < ApplicationRecord
   end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+
+  def following?(user)
+    followings.include?(user)
+  end
 end
 
-def follow(user_id)
-  relationships.create(followed_id: user_id)
-end
 
-def unfollow(user_id)
-  relationships.find_by(followed_id: user_id).destroy
-end
-
-def following?(user)
-  followings.include?(user)
-end
 
