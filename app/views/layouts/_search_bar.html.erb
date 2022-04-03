@@ -2,7 +2,7 @@
   <div class="row mt-2">
     <div class="col">
       <%if user_signed_in?%>
-        <div class="search_form mx-auto">
+        <div class="search_form d-flex justify-content-center">
           <%=form_with url:search_path,local:true,method: :get do |f|%>
             <%=f.text_field :word%>
             <%=f.select :range,options_for_select([["User"],["Book"]])%>
