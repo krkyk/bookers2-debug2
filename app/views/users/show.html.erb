@@ -3,6 +3,18 @@
     <div class='col-md-3'>
       <h2>User info</h2>
       <%= render 'info', user: @user %>
+        <%if (current_user.followed_by? @user) && (@user.followed_by? current_user)%>
+          <%if @isRoom==true%>
+            <%=link_to"chatへ",room_path(@roomId)%>
+          <%else%>
+            <%=form_with model:@room,local:true do |f|%>
+              <%=fields_for @entry do |e|%>
+              <%=e.hidden_field :user_id,value: @user.id%>
+              <%end%>
+            <%=f.submit"chatを始める",class:"btn btn-outline-secondary btn-sm mt-2"%>
+            <%end%>
+          <%end%>
+        <%end%>
       <h2 class="mt-3">New book</h2>
       <%= render 'books/form', book: @book %>
     </div>

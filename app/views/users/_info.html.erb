@@ -27,15 +27,15 @@
 </table>
 
 <div class='row'>
-<%if current_user.id==user.id%>
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
-    <i class="fas fa-user-cog"></i>
-  <% end %>
-<%else%>
-  <%if current_user.following?(user)%>
-    <%=link_to"フォロー外す",user_relationships_path(user),class:"btn btn-sm btn-info",method: :delete%>
+  <%if current_user.id==user.id%>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
   <%else%>
-    <%=link_to"フォローする",user_relationships_path(user),class:"btn btn-sm btn-success",method: :post%>
+    <%if current_user.following?(user)%>
+      <%=link_to"フォロー外す",user_relationships_path(user),class:"btn btn-sm btn-info",method: :delete%>
+    <%else%>
+      <%=link_to"フォローする",user_relationships_path(user),class:"btn btn-sm btn-success",method: :post%>
+    <%end%>
   <%end%>
-<%end%>
 </div>
