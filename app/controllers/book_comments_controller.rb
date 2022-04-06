@@ -1,4 +1,5 @@
 class BookCommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     @book=Book.find(params[:book_id])
