@@ -24,4 +24,6 @@ class Book < ApplicationRecord
     end
   end
 
+
+
 end
