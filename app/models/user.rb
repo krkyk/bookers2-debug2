@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :followers,through: :reverse_of_relationships,source: :follower
   has_many :messages,dependent: :destroy
   has_many :entrys,dependent: :destroy
+  has_many :rooms,through: :entrys
+  has_many :view_counts,dependent: :destroy
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
@@ -40,9 +42,6 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  def followed_by?(user)
-    reverse_of_relationships.find_by(follower_id: user.id).present?
-  end
 
   def self.looks(method,word)
     if method=="perfect_match"
