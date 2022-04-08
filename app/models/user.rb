@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :entrys,dependent: :destroy
   has_many :rooms,through: :entrys
   has_many :view_counts,dependent: :destroy
-  has_many :group_usersdependent: :destroy
+  has_many :group_users,dependent: :destroy
   has_many :groups,through: :group_users
   has_one_attached :profile_image
 

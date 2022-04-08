@@ -26,10 +26,10 @@
             </td>
             <td><%=link_to group.name,group_path(group.id)%></td>
             <td><%=group.introduction%></td>
-            <td><%=</td>
+            <td><%=group.users.count%></td>
             <td>
               <%if group.owner_id==current_user.id%>
-                <%=link_to"Edit",edit_group_path(group.id)%>
+                <%=link_to"Edit",edit_group_path(group.id),class:"btn btn-sm btn-success"%>
               <%end%>
             </td>
           </tr>

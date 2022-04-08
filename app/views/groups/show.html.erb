@@ -9,6 +9,15 @@
     <div class="col-md-8 offset-md-1">
       <h2>Group Detail</h2>
       <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>グループ名</th>
+            <th>紹介文</th>
+            <th>メンバー</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td>
@@ -17,8 +26,17 @@
             <td><%=@group.name%></td>
             <td><%=@group.introduction%></td>
             <td>
+              <%@group.users.each do |member|%>
+                <%=member.name%><br>
+              <%end%>
+            </td>
+            <td>
               <%if @group.owner_id==current_user.id%>
-                <%=link_to"Edit",edit_group_path(@group.id)%>
+                <%=link_to"Edit",edit_group_path(@group.id),class:"btn btn-sm btn-success"%>
+              <%elsif @group.users.include?(current_user)%>
+                <%=link_to"Leave this group",group_path(@group),method: :delete,class:"btn btn-sm btn-danger"%>
+              <%else%>
+                <%=link_to"Join this group",group_join_path(@group),class:"btn btn-sm btn-success"%>
               <%end%>
             </td>
           </tr>
