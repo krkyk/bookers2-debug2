@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>Event Mail</h2>
+      <%=form_with url:group_send_mail_path(@group),method: :get,local:true do |f|%>
+      <div class="form-group">
+        <%=f.label :Title%>
+        <%=f.text_field :mail_title,class:"form-control"%>
+      </div>
+      <div class="form-group">
+        <%=f.label :Content%>
+        <%=f.text_area :mail_content,class:"form-control"%>
+      </div>
+      <div class="form-group text-right">
+        <%=f.submit"送信",class:"btn btn-sm btn-success "%>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>

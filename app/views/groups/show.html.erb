@@ -27,12 +27,13 @@
             <td><%=@group.introduction%></td>
             <td>
               <%@group.users.each do |member|%>
-                <%=member.name%><br>
+                <li style="list-style:none; text-center"><%=member.name%></li>
               <%end%>
             </td>
             <td>
               <%if @group.owner_id==current_user.id%>
                 <%=link_to"Edit",edit_group_path(@group.id),class:"btn btn-sm btn-success"%>
+                <%=link_to"Notice an Event",group_new_mail_path(@group),class:"btn btn-sm btn-info"%>
               <%elsif @group.users.include?(current_user)%>
                 <%=link_to"Leave this group",group_path(@group),method: :delete,class:"btn btn-sm btn-danger"%>
               <%else%>

@@ -76,4 +76,17 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.hosts << "c99f0a82887f4bbebd823ce1e9d511b9.vfs.cloud9.us-east-1.amazonaws.com"
   config.hosts << "7f26772328724b9c9ec5882b45478728.vfs.cloud9.ap-northeast-1.amazonaws.com"
+
+  config.action_mailer.raise_delivery_errors = true#送信失敗の時にエラーを出す
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port:                 587,#smtpサーバーのポート番号
+    address:              'smtp.gmail.com',#smtpサーバーのホスト名
+    domain:               'gmail.com',#HELOドメイン
+    user_name:            '<YOUR EMAIL ADDRESS>',#送信に使用するGmailのアドレス
+    password:             '<YOUR EMAIL PASSWORD>',#Gmailのパスワード
+    authentication:       'login',#認証方法
+    enable_starttls_auto: true#TLS認証の使用
+  }
+
 end
