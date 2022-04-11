@@ -58,6 +58,13 @@ class User < ApplicationRecord
       User.all
     end
   end
+  
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64#ランダムな文字列を生成するRubyのメソッドの一種
+      user.name = "guestuser"
+    end
+  end
 
 end
 
