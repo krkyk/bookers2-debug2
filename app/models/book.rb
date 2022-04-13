@@ -26,6 +26,8 @@ class Book < ApplicationRecord
     end
   end
 
-
+  scope:created_today,->{where(created_at:Time.zone.now.all_day)}#今日
+  scope:created_yesterday,->{where(created_at:1.day.ago.all_day)}#昨日
+  #scope:created_this_week,->{where(created_at:6.day)
 
 end
