@@ -9,7 +9,10 @@ class UsersController < ApplicationController
     @book = Book.new
     @today_book=@books.created_today
     @yesterday_book=@books.created_yesterday
-    @the_day_before=@today_book.count/@yesterday_book.count.to_f#to_fは小数点まで表示してくれるメソッド
+    @the_day_ratio=(@today_book.count/@yesterday_book.count.to_f)*100#to_fは小数点まで表示してくれるメソッド
+    @this_week_book=@books.created_this_week
+    @last_week_book=@books.created_last_week
+    @the_week_ratio=(@this_week_book.count/@last_week_book.count.to_f)*100
   end
 
   def index

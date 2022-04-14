@@ -25,9 +25,29 @@
             <%if @yesterday_book.count==0%>
               <td>前日の投稿はありません</td>
             <%else%>
-              <td><%=(@the_day_before*100).round%></td>
+              <td><%=@the_day_ratio.round%></td>
             <%end%>
             </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>今週の投稿数</th>
+            <th>先週の投稿数</th>
+            <th>先週比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%=@this_week_book.count%></td>
+            <td><%=@last_week_book.count%></td>
+            <%if @last_week_book==0%>
+              <td>先週の投稿はありません</td>
+            <%else%>
+              <td><%=@the_week_ratio.round%></td>
+            <%end%>
           </tr>
         </tbody>
       </table>
