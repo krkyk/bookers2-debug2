@@ -10,7 +10,7 @@
   <%if book.id===nil%>
   <div class="form-group" id="star">
     <%= f.label :rate %>
-    <%=f.hidden_field :star,id: :review_star,class:'form-control'%>
+    <%=f.hidden_field :rate,id: :review_star,class:'form-control'%>
   </div>
   <script>
   $(document).on('turbolinks:load',function(){
@@ -19,8 +19,9 @@
       size :36,
       starOff:'<%=asset_path("star-off.png")%>',
       starOn:'<%=asset_path("star-on.png")%>',
-      scoreName:'book[star]',
-      half:false,
+      starHalf: '<%= asset_path('star-half.png') %>',
+      scoreName:'book[rate]',
+      half:true,
     });
   });
   </script>

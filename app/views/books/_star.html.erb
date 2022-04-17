@@ -1,15 +1,15 @@
-
-        <div id="star-rate<%=book.id%>"></div>
+         <div id="star-rate<%=book.id%>" class="form-group"></div>
             <script>
             $(document).on("turbolinks:load",function(){
               $("#star-rate<%=book.id%>").empty();
               $("#star-rate<%=book.id%>").raty({
-                size :5,
+                size :20,
                 starOff:"<%=asset_path("star-off.png")%>",
                 starOn:"<%=asset_path("star-on.png")%>",
+                starHalf: "<%= asset_path('star-half.png') %>",
                 half:false,
                 readOnly:true,
-                score:<%=book.star%>
+                score:<%=book.rate%>,
               });
             });
             </script>
