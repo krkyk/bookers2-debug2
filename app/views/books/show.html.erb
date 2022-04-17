@@ -23,20 +23,7 @@
           <td id="comments-number">
             <%=render"book_comments/comments_number",book:@book%>
           </td>
-          <td>
-            <div id="star-rate<%=@book.id%>"></div>
-            <script>
-              $("#star-rate<%=@book.id%>").empty();
-              $("#star-rate<%=@book.id%>").raty({
-                size :36,
-                starOff:"<%=asset_path("star-off.png")%>",
-                starOn:"<%=asset_path("star-on.png")%>",
-                half:false,
-                readOnly:true,
-                score:<%=@book.star%>
-              });
-            </script>
-          </td>
+          <td><%=render"books/star",book:@book%></td>
           <td>閲覧数:<%=@book.impressionist_count%></td>
           <%if @book.user==current_user%>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>

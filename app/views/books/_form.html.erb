@@ -7,20 +7,26 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <%if book.id===nil%>
   <div class="form-group" id="star">
-    <%=f.label :star,"Rate"%>
-    <%=f.hidden_field :star,id: :review_star%>
+    <%= f.label :rate %>
+    <%=f.hidden_field :star,id: :review_star,class:'form-control'%>
   </div>
   <script>
-    jQuery("#star"($)).empty();
-    jQuery("#star"($)).raty({
+  $(document).on('turbolinks:load',function(){
+    $('#star').empty();
+    $('#star').raty({
       size :36,
-      starOff:"<%=asset_path("star-off.png")%>",
-      starOn:"<%=asset_path("star-on.png")%>",
-      scoreName:"book[star]",
+      starOff:'<%=asset_path("star-off.png")%>',
+      starOn:'<%=asset_path("star-on.png")%>',
+      scoreName:'book[star]',
       half:false,
     });
+  });
   </script>
+  <%else%>
+  <%=render"star",book:book%>
+  <%end%>
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>
