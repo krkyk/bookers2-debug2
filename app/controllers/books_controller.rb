@@ -12,6 +12,9 @@ class BooksController < ApplicationController
   end
 
   def index
+    #from  = Time.current.at_beginning_of_day１週間いいね順で並ぶ時の書き方
+    #to = (from + 6.day).at_end_of_day
+    #@books=Book.includes(:favorited_users).sort{|a,b|b.favorited_users.includes(:favorites).where(created_at: from...to).size<=>a.favorited_users.includes(:favorites).where(created_at: from...to).size}
     @book = Book.new
     if params[:latest]
       @books = Book.latest
@@ -20,13 +23,16 @@ class BooksController < ApplicationController
     else
      @books = Book.all
     end
+    @book_tag=@book.tags
   end
 
 
   def create
     @book = Book.new(book_params)
     @book.user_id=current_user.id
+    tag_list=params[:book][:name].split(",")
     if @book.save
+      @book.save_tag(tag_list)
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
