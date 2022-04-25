@@ -9,6 +9,7 @@ class BooksController < ApplicationController
     @user=User.find(@book.user.id)
     @book_comment=BookComment.new
     impressionist(@book)
+    @book_tags=@book.tags
   end
 
   def index
@@ -23,7 +24,6 @@ class BooksController < ApplicationController
     else
      @books = Book.all
     end
-    @book_tag=@book.tags
   end
 
 
@@ -57,6 +57,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
     redirect_to books_path
+  end
+  
+  def search_tag
+    @tag_list=Tag.all
+    @tag=Tag.find(params[:tag_id])
+    @books=@tag.books.all
   end
 
   private

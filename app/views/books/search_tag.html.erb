@@ -1,0 +1,17 @@
+<div class="container">
+<h5>タグが<%=@tag.name%>の投稿一覧</h5>
+
+<% @tag_list.each do |list|%>
+<%=link_to list.name,search_tag_path(tag_id: list.id) %>
+<%="(#{list.books.count})" %><% end %>
+<% @books.each do |book| %>
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title">
+      <%=link_to book_path(book.id) do %><%= book.title %>
+      <% end %>
+      <%= book.body %>
+    </h6>
+  </div>
+</div>
+<%end%>
